@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Journey</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* ===================== BODY ===================== */
+body{
+    height:100vh;
+    overflow:hidden;
+    background: linear-gradient(135deg,#ffb6c1,#ff69b4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* ===================== PAGE SYSTEM ===================== */
+.page{
+    display:none;
+    width:100%;
+    height:100%;
+    justify-content:center;
+    align-items:center;
+}
+
+.active{
+    display:flex;
+}
+
+/* ===================== F1 LOCK ===================== */
+.container{
+    text-align:center;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    width:300px;
+}
+
+.dots{
+    font-size:30px;
+    letter-spacing:10px;
+    margin-bottom:20px;
+    min-height:40px;
+}
+
+.keypad{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+button{
+    padding:15px;
+    font-size:18px;
+    border:none;
+    border-radius:12px;
+    background:#ff69b4;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{ opacity:0.9; }
+
+.action{
+    grid-column:span 3;
+}
+
+/* ===================== F2 ===================== */
+.box{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    width:300px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.profile{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:50%;
+    border:3px solid #ff1493;
+    margin-bottom:15px;
+}
+
+h2{
+    color:#ff1493;
+    margin-bottom:20px;
+}
+
+#yesBtn{
+    background:#ff1493;
+    padding:12px 20px;
+    border-radius:12px;
+}
+
+#noBtn{
+    background:#ff4fa3;
+    padding:12px 20px;
+    border-radius:12px;
+    margin-left:10px;
+}
+
+/* ===================== F3 ===================== */
+.firework{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:white;
+    border-radius:50%;
+    animation: boom 3s infinite;
+    opacity:0;
+}
+
+@keyframes boom{
+    0%{transform:scale(0); opacity:1;}
+    50%{opacity:1;}
+    100%{transform:scale(18); opacity:0;}
+}
+
+.text-box{
+    text-align:center;
+    color:white;
+    max-width:300px;
+    animation: fadeIn 2s ease forwards;
+    opacity:0;
+    z-index:2;
+}
+
+@keyframes fadeIn{
+    0%{opacity:0; transform:translateY(30px);}
+    100%{opacity:1; transform:translateY(0);}
+}
+
+.img{
+    position:absolute;
+    width:70px;
+    height:70px;
+    border-radius:15px;
+    object-fit:cover;
+    opacity:0;
+    animation: pop 1s forwards;
+}
+
+@keyframes pop{
+    0%{transform:scale(0);}
+    100%{transform:scale(1); opacity:1;}
+}
+
+/* position images */
+.img1{ top:12%; left:45%; animation-delay:0.3s;}
+.img2{ top:35%; left:75%; animation-delay:0.6s;}
+.img3{ top:70%; left:55%; animation-delay:0.9s;}
+.img4{ top:70%; left:25%; animation-delay:1.2s;}
+.img5{ top:35%; left:10%; animation-delay:1.5s;}
+
+/* mobile */
+@media(max-width:600px){
+    .img{ width:60px; height:60px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===================== F1 ===================== -->
+<div class="page active" id="page1">
+
+    <div class="container">
+        <h2>Enter Password</h2>
+        <div class="dots" id="dots"></div>
+
+        <div class="keypad">
+            <button onclick="press(1)">1</button>
+            <button onclick="press(2)">2</button>
+            <button onclick="press(3)">3</button>
+            <button onclick="press(4)">4</button>
+            <button onclick="press(5)">5</button>
+            <button onclick="press(6)">6</button>
+            <button onclick="press(7)">7</button>
+            <button onclick="press(8)">8</button>
+            <button onclick="press(9)">9</button>
+            <button onclick="clearAll()">C</button>
+            <button onclick="press(0)">0</button>
+            <button onclick="backspace()">⌫</button>
+
+            <div class="action">
+                <button onclick="check()">ENTER</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ===================== F2 ===================== -->
+<div class="page" id="page2">
+
+    <div class="box">
+        <img src="g1.jpeg" class="profile">
+        <h2>Sayang saya tak? 💖</h2>
+
+        <button id="yesBtn" onclick="goF3()">YES</button>
+        <button id="noBtn" onclick="grow()">NO</button>
+    </div>
+
+</div>
+
+<!-- ===================== F3 ===================== -->
+<div class="page" id="page3">
+
+    <!-- fireworks -->
+    <div class="firework" style="top:10%; left:20%;"></div>
+    <div class="firework" style="top:30%; left:80%; animation-delay:0.5s;"></div>
+    <div class="firework" style="top:60%; left:10%; animation-delay:1s;"></div>
+    <div class="firework" style="top:80%; left:70%; animation-delay:1.5s;"></div>
+
+    <!-- images -->
+    <img class="img img1" src="m1.jpg">
+    <img class="img img2" src="m2.jpg">
+    <img class="img img3" src="m3.jpg">
+    <img class="img img4" src="m4.jpg">
+    <img class="img img5" src="m5.jpg">
+
+    <!-- text -->
+    <div class="text-box">
+        <h1>💖 RANDOM 💖</h1>
+        <p>
+            Saya tak tau nak buat apa tengah tunggu bola lawan so saya buat website ni 💕<br><br>
+            Pandai kan saya buat ni. Saya buat sendiri so hati-hati saya boleh hack awak luke 💌
+        </p>
+    </div>
+
+</div>
+
+<script>
+
+/* ================= F1 ================= */
+let input = "";
+const password = "23326";
+
+function press(n){
+    if(input.length < 10){
+        input += n;
+        document.getElementById("dots").innerText = "•".repeat(input.length);
+    }
+}
+
+function clearAll(){
+    input="";
+    document.getElementById("dots").innerText="";
+}
+
+function backspace(){
+    input = input.slice(0,-1);
+    document.getElementById("dots").innerText = "•".repeat(input.length);
+}
+
+function check(){
+    if(input === password){
+        showPage(2);
+    }else{
+        alert("SALAH LUKE!");
+        clearAll();
+    }
+}
+
+/* ================= F2 ================= */
+let scale = 1;
+function grow(){
+    scale += 0.5;
+    document.getElementById("yesBtn").style.transform = `scale(${scale})`;
+}
+
+function goF3(){
+    showPage(3);
+}
+
+/* ================= PAGE SWITCH ================= */
+function showPage(n){
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById("page"+n).classList.add("active");
+}
+
+</script>
+
+</body>
+</html>
